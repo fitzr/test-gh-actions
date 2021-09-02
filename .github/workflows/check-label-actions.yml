@@ -6,6 +6,6 @@ jobs:
     steps:
       - run: echo $GITHUB_REPOSITORY
       - run: echo $GITHUB_SHA
-      - run: gh api search/issues -f q='is:pr'
+      - run: gh api -X GET search/issues -f q='is:pr'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
