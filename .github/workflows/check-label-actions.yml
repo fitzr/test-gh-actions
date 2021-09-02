@@ -4,11 +4,8 @@ jobs:
   check-label:
     runs-on: ubuntu-latest
     steps:
-      - run: echo $GITHUB_REPOSITORY
-      - run: echo $GITHUB_SHA
-      - run: echo $GITHUB_REF
-      - run: echo $GITHUB_HEAD_REF
-      - run: echo $GITHUB_BASE_REF
-      - run: gh api -X GET search/issues -f q="repo:$GITHUB_REPOSITORY is:pr"
+      - run: PR_NUM=`echo $GITHUB_REF | sed -e 's/[^0-9]//g'`
+      - run: echo $PR_NUM
+      - run: gh api repos/$GITHUB_REPOSITORY/issues/$PR_NUM
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
