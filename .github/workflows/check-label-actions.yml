@@ -4,9 +4,13 @@ jobs:
   check-label:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: check PR labels
+        run: |
           PR_NUM=`echo $GITHUB_REF | sed -e 's/[^0-9]//g'`
-          echo $PR_NUM
-          gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUM" --jq '.labels'
+          LABELS=`gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUM" --jq '.labels'`
+          if [ $LABELS = '[]' ]; then
+            echo '1つ以上のラベルを設定してください'
+            exit(1)
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
