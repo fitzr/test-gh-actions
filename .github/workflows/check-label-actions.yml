@@ -9,8 +9,8 @@ jobs:
           PR_NUM=`echo $GITHUB_REF | sed -e 's/[^0-9]//g'`
           LABELS=`gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUM" --jq '.labels'`
           if [ $LABELS = '[]' ]; then
-            echo "1つ以上のラベルを設定してください"
-            exit(1)
+            echo '1つ以上のラベルを設定してください'
+            exit 1
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
