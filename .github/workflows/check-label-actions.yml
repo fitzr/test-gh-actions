@@ -4,6 +4,6 @@ jobs:
   check-label:
     runs-on: ubuntu-latest
     steps:
-      - run: gh repo list
+      - run: gh api search/issues -f q="repo:$GITHUB_REPOSITORY is:pr SHA=$GITHUB_SHA" --jq '.items.[].labels'`
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
