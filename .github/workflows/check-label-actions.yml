@@ -6,6 +6,6 @@ jobs:
     steps:
       - run: echo $GITHUB_REPOSITORY
       - run: echo $GITHUB_SHA
-      - run: gh api -X GET search/issues -f q="repo:$GITHUB_REPOSITORY is:open"
+      - run: gh api -X GET search/issues -f q="repo:$GITHUB_REPOSITORY is:open" --jq '.items.[].labels'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
