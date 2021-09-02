@@ -1,0 +1,10 @@
+name: check-label-actions
+on: [pull_request]
+jobs:
+  check-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: show-labels
+        run: |
+          LABELS=`gh api -X GET search/issues -f q="repo:$GITHUB_REPOSITORY is:pr SHA=$GITHUB_SHA" --jq '.items.[].labels'`
+          echo $LABELS
