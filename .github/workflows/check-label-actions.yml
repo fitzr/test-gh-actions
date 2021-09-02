@@ -6,6 +6,6 @@ jobs:
     steps:
       - run: PR_NUM=`echo $GITHUB_REF | sed -e 's/[^0-9]//g'`
       - run: echo $PR_NUM
-      - run: gh api "repos/$GITHUB_REPOSITORY/issues/$PR_NUM"
+      - run: gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUM"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
